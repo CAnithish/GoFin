@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoFin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #333;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007aff;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #f1f1f1;
+            padding: 10px 0;
+        }
+        nav button {
+            color: #007aff;
+            background: none;
+            border: none;
+            margin: 0 15px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        nav button:hover {
+            text-decoration: underline;
+        }
+        .content {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        footer {
+            background-color: #007aff;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+
+        .dropdown {
+            float: right;
+            overflow: hidden;
+        }
+        .dropdown .dropbtn {
+            font-size: 17px;  
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color:  #007aff;
+            font-family:  #007aff;
+            margin: 0;
+            cursor: pointer;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            right: 0;
+        }
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown:hover .dropbtn {
+            background-color: #0056b3;
+        }
+        .icon-link {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            text-align: center;
+            width: 100px;
+            height: 120px;
+            text-decoration: none; /* Remove underline */
+            color: inherit; /* Inherit color from parent */
+        }
+        .icon-link:hover {
+            background-color: #ddd;
+        }
+        .icon {
+            font-size: 48px;
+            margin-bottom: 5px;
+            display: block; /* Ensure icon is above text */
+        }
+        .link-text {
+            font-size: 12px;
+            display: block; /* Ensure text is below icon */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="dropdown navbar-right">
+            <button class="dropbtn">My Profile ▼</button>
+            <div class="dropdown-content">
+                <!-- <a href="http://localhost/example/userType.html">Settings</a> -->
+                <a href="http://localhost/example/userprofile.php">Update Profile</a>
+                <a id="logout" href="http://localhost/example/logout.php" >Logout</a><!-- have to delete the cookie as well then only signin page will come. other wise it will be a loop -->
+                <!-- <script> document.getElementById('logout').addEventListener('click', function() {
+                 document.cookie = "userdetails=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                window.location.href = "http://localhost/example/ABlogin.html";
+                })
+                </script> -->
+            </div>
+        </div>
+        <h1>GoFin</h1>
+        
+    </header>
+    <!-- <nav>
+        <button onclick="showSection('home')">Home</button>
+        <button onclick="showSection('invoices')">Invoices</button>
+        <button onclick="showSection('bills')">Bills</button>
+        <button onclick="showSection('contact')">Contact</button> 
+        <a href="http://localhost/example/chat.html">Chat</a>
+    </nav> -->
+
+    <div class="content" id="home">
+        
+        <!-- <p id="mobilenumber"></p>
+        <p id="abid"></p>
+        <p id="ERP"></p>
+        <p id="zoho_org_id"></p>
+        <p id="accesstoken"></p>
+        <p id="accesstoken_timestamp"></p>
+        <p id="currenttime"></p>
+        <p id="ZOHOconnectionstatus"></p>
+
+        <a href="http://localhost/example/newaccesstoken.php">Relink zoho</a> -->
+        <br style="text-align: center; margin-top: 50px;">
+            <a class="icon-link" href="http://localhost/example/gofin/glmaster.php">
+                <i class="fa-solid fa-list-check icon"></i>
+                <span class="link-text">Category Master</span>
+            </a>
+            <a class="icon-link" href="http://localhost/example/gofin/vendorlist.php">
+                <i class="fa-solid fa-user icon"></i>
+                <span class="link-text">Vendor Master</span>
+            </a>
+            <a class="icon-link" href="http://localhost/example/gofin/invreport.php">
+                <i class="fa-solid fa-box icon"></i>
+                <span class="link-text">Inventory Report</span>
+            </a>
+            <br>
+            <a class="icon-link" href="http://localhost/example/gofin/bill_list.php">
+                <i class="fa-solid fa-file-invoice icon"></i>
+                <span class="link-text">Bills</span>
+            </a>
+            <a class="icon-link" href="http://localhost/example/gofin/newbillui.php">
+                <i class="fa-solid fa-file-invoice-dollar icon"></i>
+                <span class="link-text">New Bill</span>
+            </a>
+            <!-- <a class="icon-link" href="http://localhost/example/gofin/einvoiceuploadui.html">
+                <i class="fa-solid fa-file-invoice-dollar icon"></i>
+                <span class="link-text">Upload E-Inv/GSTR2B</span>
+            </a> -->
+            <a class="icon-link" href="http://localhost/example/gofin/receipt&payment_list.php">
+                <i class="fa-solid fa-bank icon"></i>
+                <span class="link-text">Bank Transactions</span>
+            </a>
+            <br>
+            <a class="icon-link" href="http://localhost/example/gofin/trialbalance.php">
+                <i class="fa-solid fa-chart-line icon"></i>
+                <span class="link-text">Trial Balance</span>
+            </a>
+
+            <a class="icon-link" href="http://localhost/example/gofin/barcodetest.php">
+                <i class="fa-solid fa-barcode icon"></i>
+                <span class="link-text">Barcode Scan</span>
+            </a>
+            <br>
+            <a class="icon-link" href="http://localhost/example/gofin/salesinvoicelist.php">
+                <i class="fa-solid fa-clipboard-list icon"></i>
+                <span class="link-text">Sales Invoice List</span>
+            </a>
+            <a class="icon-link" href="http://localhost/example/gofin/customerlist.php">
+                <i class="fa-solid fa-user icon"></i>
+                <span class="link-text">Customer Master</span>
+            </a>
+            <a class="icon-link" href="http://localhost/example/gofin/newsalesinvoice.php">
+                <i class="fa-solid fa-plus-square icon"></i>
+                <span class="link-text">New Sales Invoice</span>
+            </a>
+        </div>
+        
+        
+       
+
+    <script>    
+    
+// Function to get the value of a specific key from the cookie(JSON cookie)
+function getCookieValue(cookieName, key) {
+    const cookies = document.cookie.split('; ');
+    const cookie = cookies.find(c => c.startsWith(cookieName + '='));
+    if (cookie) {
+        const cookieValue = cookie.split('=')[1];
+        const keyValuePairs = JSON.parse(decodeURIComponent(cookieValue));
+        //return decodeURIComponent(cookieValue);//to log entire JSON cookie
+        return keyValuePairs[key] || "Key not found";
+    }
+    return null;
+    }
+
+
+
+// //get cookie (single)
+//     function getCookie(name) {
+//     const nameEQ = name + "=";
+//     const ca = document.cookie.split(';');
+//     for (let i = 0; i < ca.length; i++) {
+//         let c = ca[i];
+//         while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+//         if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+//     }
+//     return null;
+//     }
+
+    // Example usage:
+    const abid = getCookieValue('userdetails', 'abid');
+    const zoho_org_id =  getCookieValue('userdetails', 'zoho_org_id');
+    const mobilenumber = getCookieValue('userdetails', 'mobilenumber');
+    const accesstoken = getCookieValue('userdetails', 'accesstoken');
+    var accesstoken_timestamp = (decodeURIComponent(getCookieValue('userdetails', 'accesstoken_timestamp')));
+    var accesstoken_timestamp = new Date(accesstoken_timestamp.replace(' ', 'T'));
+    var currentTime = new Date();
+
+    var timesinceaccesstoken = (currentTime - accesstoken_timestamp)/1000/60;//in milli seconds so converting it into seconds
+
+
+//check cookie
+    function checkCookie() {
+
+    if (abid != null) {
+        if (timesinceaccesstoken <60) {document.getElementById("ZOHOconnectionstatus").innerHTML="Connected to zoho";
+        } else {document.getElementById("ZOHOconnectionstatus").innerHTML="Access token expired, please click below button to regenerate access token "+timesinceaccesstoken}
+        
+        // document.getElementById("currenttime").innerHTML="currenttime is : "+currentTime;
+        // document.getElementById("mobilenumber").innerHTML="Welcome "+mobilenumber;
+        // document.getElementById("abid").innerHTML="AB ID : "+abid;
+        // if (zoho_org_id != null) {document.getElementById("zoho_org_id").innerHTML="Zoho Org Id : "+zoho_org_id;
+        // } else {}
+        // if (accesstoken != null) {document.getElementById("accesstoken").innerHTML="Access token : "+accesstoken;
+        // } else {}
+        // if (accesstoken_timestamp != null) {document.getElementById("accesstoken_timestamp").innerHTML="Access token timestamp : "+accesstoken_timestamp;
+        // } else {}
+        // //document.getElementById("timeDiffInseconds").innerHTML="timeDiffInseconds : "+timeDiffInseconds;
+        
+    } else {
+        window.location.href = "http://localhost/example/ABlogin.html";
+    }
+
+
+        //document.getElementById("currenttime").innerHTML="currenttime is : "+currentTime;
+        document.getElementById("mobilenumber").innerHTML="Welcome "+mobilenumber;
+        document.getElementById("abid").innerHTML="AB ID : "+abid;
+        if (zoho_org_id != null) {document.getElementById("zoho_org_id").innerHTML="Zoho Org Id : "+zoho_org_id;
+        } else {}
+        if (accesstoken != null) {document.getElementById("accesstoken").innerHTML="Access token : "+accesstoken;
+        } else {}
+        if (accesstoken_timestamp != null) {document.getElementById("accesstoken_timestamp").innerHTML="Access token timestamp : "+accesstoken_timestamp;
+        } else {}
+        //document.getElementById("timeDiffInseconds").innerHTML="timeDiffInseconds : "+timeDiffInseconds;
+        
+
+
+}
+
+ //   Example usage:
+    checkCookie();
+
+
+
+
+    </script>
+
+
+
+
+    </div>
+
+
+
+
+
+
+    <div class="content" id="invoices">
+        <h2>Invoices</h2>
+        <p>Fetched invoices from Zoho books</p>
+        <style>
+            table {
+              font-family: arial, sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+            }
+            
+            td, th {
+              border: 1px solid #dddddd;
+              text-align: left;
+              padding: 8px;
+            }
+            
+            tr:nth-child(even) {
+              background-color: #dddddd;
+            }
+        </style>
+        <p id="container"></p>
+
+
+        <!-- <h1>Invoices</h1> -->
+        <table id="invoicesTable" border="1">
+            <thead>
+                <tr id="tableHeaders">
+                    <!-- Headers will be inserted here -->
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Table rows will be inserted here -->
+            </tbody>
+        </table>
+        <script src="table.js"></script>
+    </div>
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="content" id="bills">
+        <h2>Bills</h2>
+        <p>Fetched invoices from ZOHO(sales)</p>
+        <style>
+            table {
+              font-family: arial, sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+            }
+            
+            td, th {
+              border: 1px solid #dddddd;
+              text-align: left;
+              padding: 8px;
+            }
+            
+            tr:nth-child(even) {
+              background-color: #dddddd;
+            }
+            </style>
+        
+          <div id="php-content"></div>
+ 
+
+    <script>
+      let input = "php json test.php"//readexcel.php
+      // Function to fetch PHP content
+      async function fetchPHPContent() {
+          let x = await fetch(input);
+          let y = await x.text();
+          
+                  document.getElementById('php-content').innerHTML = y;
+              }
+              //.catch(error => console.error('Error fetching PHP content:', error));
+      
+
+      // Call the function to fetch PHP content
+      fetchPHPContent();
+  </script>
+  <div id="bill-data"></div>      
+    </div>
+
+
+
+
+
+
+
+
+    <div class="content" id="contact">
+        <h2>Contact Us</h2>
+        <p>Get in touch with us at 9444****.</p>
+        <a href="http://localhost/example/chat.html">Chat</a>
+    </div>
+    <footer>
+        <p>&copy; 2025 GoFin</p>
+    </footer>
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Show the selected section
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        // Show the home section by default
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('home');
+        });
+
+        const billDataDiv = document.getElementById('bill-data');
+                billDataDiv.innerHTML = "........"
+
+
+
+
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</body>
+</html>

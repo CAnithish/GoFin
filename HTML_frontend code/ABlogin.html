@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoFin</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #333;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007aff;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #f1f1f1;
+            padding: 10px 0;
+        }
+        nav button {
+            color: #007aff;
+            background: none;
+            border: none;
+            margin: 0 15px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        nav button:hover {
+            text-decoration: underline;
+        }
+        .content {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        footer {
+            background-color: #007aff;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>GoFin</h1>
+    </header>
+    <div class="content" id="home">
+        <h2>Welcome</h2>
+        <p>Welcome to GoFin. Please login to get you bills</p>
+
+        <form action="http://localhost/example/login.php" method="post">
+            <label for="mobile">Mobile number:</label><br>
+            <input type="tel" id="mobile" name="mobile"><br>
+            
+            <label for="passwords">Password:</label><br>
+            <input type="password" id="passwords" name="passwords"><br><br>
+            <!-- <label for="erp">ERP name:</label><br>
+            <input type="text" id="erp" name="erp"><br><br>
+            <label for="erpid">ERP ID:</label><br>
+            <input type="text" id="erpid" name="erpid"><br><br>
+            <label for="erppw">ERP password:</label><br>
+            <input type="password" id="erppw" name="erppw"><br><br> -->
+
+            <input type="submit" value="Submit">
+
+
+            <p> New User? <a href="signup.html"> Signup</a></p>
+          </form>
+    
+    <script>
+
+    // Function to get the value of a specific key from the cookie(JSON cookie)
+    function getCookieValue(cookieName, key) {
+    const cookies = document.cookie.split('; ');
+    const cookie = cookies.find(c => c.startsWith(cookieName + '='));
+    if (cookie) {
+        const cookieValue = cookie.split('=')[1];
+        const keyValuePairs = JSON.parse(decodeURIComponent(cookieValue));
+        //return decodeURIComponent(cookieValue);//to log entire JSON cookie
+        return keyValuePairs[key] || "Key not found";
+        }
+        return null;
+        }
+
+//to check for any existing user
+
+const abid = getCookieValue('userdetails', 'abid');
+
+    if (abid != null) {
+        console.log(abid)
+        window.location.href = "http://localhost/example/ABhome.html";
+    } else {
+        console.log('No user logged in')
+        //window.location.href = "http://localhost/example/ABlogin.html";
+    }
+
+    </script>
+
+
+    </div>
+    <div class="content" id="bills">
+        <h2>Bills</h2>
+        <p>Fetched relevant bills from server</p>
+        <style>
+            table {
+              font-family: arial, sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+            }
+            
+            td, th {
+              border: 1px solid #dddddd;
+              text-align: left;
+              padding: 8px;
+            }
+            
+            tr:nth-child(even) {
+              background-color: #dddddd;
+            }
+            </style>
+        
+          <div id="php-content"></div>
+ 
+
+    <script>
+      let input = "php json test.php"//readexcel.php
+      // Function to fetch PHP content
+      async function fetchPHPContent() {
+          let x = await fetch(input);
+          let y = await x.text();
+          
+                  document.getElementById('php-content').innerHTML = y;
+              }
+              //.catch(error => console.error('Error fetching PHP content:', error));
+      
+
+      // Call the function to fetch PHP content
+      fetchPHPContent();
+  </script>
+
+        
+        <div id="bill-data"></div>
+
+        
+    </div>
+    <div class="content" id="contact">
+        <h2>Contact Us</h2>
+        <p>Get in touch with us at 9444****.</p>
+    </div>
+    <footer>
+        <p>&copy; 2024 GoFin</p>
+    </footer>
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Show the selected section
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        // Show the home section by default
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('home');
+        });
+
+        const billDataDiv = document.getElementById('bill-data');
+                billDataDiv.innerHTML = "........"
+
+
+
+
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</body>
+</html>
